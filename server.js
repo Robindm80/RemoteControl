@@ -10,7 +10,7 @@ var server = http.createServer(function(req, res) {
 
 var io = require('socket.io').listen(server, { log: false });
 //server.listen(process.env.PORT);
-(PORT, () => console.log(`Listening on ${ PORT }`));
+listen(PORT, () => console.log(`Listening on ${ PORT }`));
 //server.listen(3000, '0.0.0.0', function() {
     //console.log('Listening to port:  ' + 3000);
 });
