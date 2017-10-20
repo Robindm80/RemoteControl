@@ -1,0 +1,246 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width">
+<title>Remote Control</title>
+<style type="text/css">
+	*:not(input):not(textarea) {
+  	-webkit-user-select: none; /* disable selection/Copy of UIWebView */
+  	-webkit-touch-callout: none; /* disable the IOS popup when long-press on a link */
+	-webkit-appearance: none;
+}     
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	
+	.contianer {
+		width: 100%;
+		height: 100%;
+		background-color: white;
+		align-content: center;
+		margin-left: auto;
+		margin-right: auto;
+		position: absolute;
+		
+	}	
+	.head{
+		width: 90%;
+		height: 15%;
+		background-color: white;
+		align-self: center;
+		margin-left: 5%;
+	}
+	.row{
+		width: 90%;
+		height: 30%;
+		margin-left: 5%;
+		padding-top: 5%;
+		
+	}
+	.kol{
+		width: 30%;
+		height: 5%;
+		display: inline-block;
+		text-align: center;
+	}
+	.kol2{
+		width: 30%;
+		padding-bottom: 0%;
+		display: inline-block;
+		text-align: center;
+	}
+	.title{
+		max-width: 25%;
+		max-height: 25%;
+	}
+	.bigbutton{
+		max-width: 50%;
+		max-height: 50%;
+	}
+	.smallbutton{
+		max-width: 50%;
+		max-height: 50%;
+	}
+	.input{
+		width: 50%;
+		height: 50%;
+	}
+	.buttonsmall{
+		width: 150px;
+		height: 50px;
+	}
+	.button {
+                background-color: #d61d23; /* Red */
+		width: 75%;
+		height: 4.5vw;
+    border: none;
+    color: white;
+    border-radius: 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 2vw;
+		-webkit-appearance: none;
+	}
+	.button2 {
+    background-color: #d61d23; /* Red */
+		width: 75%;
+		height: 16vw;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 4vw;
+		-webkit-appearance: none;
+	}
+	
+</style>
+</head>
+
+<body>
+<div class="container">
+	<div class="head">
+    <img src="https://www.randomfotografie.nl/remote/images/logo.jpg" class="title" alt=""/> 
+    </div>
+  <div class="row">
+    	<div class="kol2"><input type="button" class="button2" id="buttonLeft" value="Left"></div>
+    	<div class="kol" id="displayText"></div>
+    	<div class="kol2"><input type="button" class="button2" id="buttonRight" value="Right"></div>
+    </div>
+    <div class="row">
+    	<div class="kol2"><input type="button" class="button" id="isolate" value="Messenblok"></div>
+    	<div class="kol2"><input type="button" disabled class="button" id="explode" value="Explode"></div>
+    	<div class="kol2"><input type="button" class="button" id="color" value="Color"></div>
+    </div>
+</div>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io.connect('http://remote80.herokuapp.com'); //(http://localhost:3000);
+	
+	var rotation = 10;
+	var timeout = 0, buttonLeft = $('#buttonLeft'), buttonRight = $('#buttonRight');
+	var buttonLeftDown = 0;
+	var buttonRightDown = 0;
+	var isisolated = 0;
+	var exploded = 0;
+	
+
+    document.getElementById("buttonLeft").onmousedown = function() {mouseLeftDown(1)};
+	document.getElementById("buttonLeft").onmouseup = function() {mouseLeftUp(0)};
+	document.getElementById("buttonLeft").ontouchstart = function() {mouseLeftDown(1)};
+	document.getElementById("buttonLeft").ontouchend = function() {mouseLeftUp(0)};
+	
+	document.getElementById("buttonRight").onmousedown = function() {mouseRightDown(1)};
+	document.getElementById("buttonRight").onmouseup = function() {mouseRightUp(0)};
+	document.getElementById("buttonRight").ontouchstart = function() {mouseRightDown(1)};
+	document.getElementById("buttonRight").ontouchend = function() {mouseRightUp(0)};
+	
+	document.getElementById("isolate").onclick = function() {isolate()};
+	document.getElementById("explode").onclick = function() {willexplode()};
+	document.getElementById("color").onclick = function() {color()};
+
+    function mouseLeftDown(data) {
+	
+		buttonLeftDown = 1;
+		LeftInterval();
+		
+	}
+	
+	function mouseLeftUp(data) {
+		buttonLeftDown = 0;
+		LeftInterval();
+		
+	}
+	
+	function mouseRightDown(data) {
+	
+		buttonRightDown = 1;
+		RightInterval();
+	}
+	
+	function mouseRightUp(data) {
+		buttonRightDown = 0;
+		RightInterval();
+	}
+	
+	function LeftInterval() {
+		if (buttonLeftDown > 0) {
+			left1 = setInterval(function () { goLeft(1) }, 1000 / 25);
+		} else {
+			clearInterval(left1);
+		}
+	}
+	
+	function RightInterval(){
+		if (buttonRightDown > 0) {
+			right1 = setInterval(function () { goRight(1) }, 1000 / 25);
+		} else {
+			clearInterval(right1);
+		}
+	}
+
+	function isolate(){
+		var elem = document.getElementById("isolate");
+		if(elem.value == "Messenblok"){
+			blok();
+			elem.value = "Reader";
+			document.getElementById("explode").disabled = false;
+		}else{
+			blok();
+			elem.value = "Messenblok";
+			if(document.getElementById("explode").value == "Implode"){ document.getElementById("explode").value = "Explode"}
+			document.getElementById("explode").disabled = true;
+		}
+	}
+	
+	function willexplode(){
+		    var elem = document.getElementById("explode");
+    if (elem.value=="Explode") {
+	    elem.value = "Implode";
+	    explode();
+    }else {
+	    elem.value = "Explode";
+	    explode();
+    }
+	}
+	
+    function goLeft(data) {
+		socket.emit('left', data);
+	}
+	
+	function goRight(data) {
+		socket.emit('right', data);
+	}
+	
+	function explode() {
+		socket.emit('explode', "");
+	}
+	
+	function implode() {
+		socket.emit('implode', "");
+	}
+	
+	function blok() {
+		socket.emit('blok', "");
+	}
+	
+	function reader() {
+		socket.emit('reader', "");
+	}
+	
+	function color() {
+		socket.emit('color', "");
+	}
+	
+	socket.on('connectToRoom', function(data){
+    	document.getElementById("displayText").innerHTML = data;
+	});
+	
+</script>
+</body>
+</html>
