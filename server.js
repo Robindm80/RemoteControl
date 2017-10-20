@@ -9,13 +9,11 @@ var server = http.createServer(function(req, res) {
 });
 
 var io = require('socket.io').listen(server, { log: false });
-//server.listen(process.env.PORT);
-listen(process.env.PORT || 3000, function(){
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
-});
+server.listen(process.env.PORT);
+
 //server.listen(3000, '0.0.0.0', function() {
-    //console.log('Listening to port:  ' + 3000);
-});
+ //   console.log('Listening to port:  ' + 3000);
+//});
 
 var allClients = [];
 var line = 0;
@@ -122,6 +120,7 @@ function leaverooms(){
 			allClients.splice(i, 1);
 		}
    }
+	}
   
 	
   
@@ -132,6 +131,6 @@ function leaverooms(){
 		console.log(allClients[i].id)
 		console.log("the id of client 0: "+ allClients[0].id);
 	}
-    }
+    
 
 });
