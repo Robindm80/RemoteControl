@@ -9,7 +9,8 @@ var server = http.createServer(function(req, res) {
 });
 
 var io = require('socket.io').listen(server, { log: false });
-server.listen(process.env.PORT);//(3000);
+server.listen(process.env.PORT);
+//server.listen(3000);
 
 var allClients = [];
 
@@ -43,27 +44,27 @@ io.on('connection', function (socket) {
 	});
 	
 	socket.on('explode', function (data) {
-		socket.broadcast.emit('explode', data);
+		socket.to(socket.username).emit('explode', data);
 		console.log('explode is being broadcasted');
 	});
 	
 	socket.on('implode', function (data) {
-		socket.broadcast.emit('implode', data);
+		socket.to(socket.username).emit('implode', data);
 		console.log('implode is being broadcasted');
 	});
 	
 	socket.on('blok', function (data) {
-		socket.broadcast.emit('blok', data);
+		socket.to(socket.username).emit('blok', data);
 		console.log('blok is being broadcasted');
 	});
 	
 	socket.on('reader', function (data) {
-		socket.broadcast.emit('reader', data);
+		socket.to(socket.username).emit('reader', data);
 		console.log('reader is being broadcasted');
 	});
 	
 	socket.on('color', function (data) {
-		socket.broadcast.emit('color', data);
+		socket.to(socket.username).emit('color', data);
 		console.log('color is being broadcasted');
 	});
 
@@ -80,7 +81,7 @@ function leaverooms(){
 			var i = allClients.indexOf(socket);
 			allClients[i].leave('waiting room');
 			allClients.splice(i, 1);
-			console.log(allClients[0].id);
+			
 		}
 	}
   function countclients(){
