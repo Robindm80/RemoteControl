@@ -9,6 +9,8 @@
   "author": "Anthelme Dumont",
   "license": "ISC",
   "dependencies": {
-    "socket.io": "^0.9.17"
+    "socket.io": "^0.9.17",
+	"node": "6.11.3",
+	"npm": "3.10.10"
   }
 }
