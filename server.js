@@ -9,12 +9,17 @@ var server = http.createServer(function(req, res) {
 });
 
 var io = require('socket.io').listen(server, { log: false });
-server.listen(process.env.PORT);
-//server.listen(3000);
+//server.listen(process.env.PORT);
+(PORT, () => console.log(`Listening on ${ PORT }`));
+//server.listen(3000, '0.0.0.0', function() {
+    //console.log('Listening to port:  ' + 3000);
+});
 
 var allClients = [];
+var line = 0;
 
 io.on('connection', function (socket) {
+	console.log("a newcomer in town");
     socket.join('gameroom');
     
     socket.username = 'gameroom';
@@ -23,8 +28,8 @@ io.on('connection', function (socket) {
     
     countclients();
     
-    io.sockets.in('waiting room').emit('connectToRoom', "You are in the waitingroom");
-    io.sockets.in('gameroom').emit('connectToRoom', "You are in the gameroom");
+    //io.sockets.in('waiting room').emit('connectToRoom', "You are in the waitingroom");
+    io.sockets.in('gameroom').emit('connectToRoom', "Use the buttons to control the object");
     
     socket.on('disconnect', function() {
         console.log('disconnect');
@@ -94,8 +99,8 @@ function leaverooms(){
 		
 				console.log(socket.username);
 				
-				io.sockets.in('waiting room').emit('connectToRoom', "You are in the waitingroom");
-				io.sockets.in('gameroom').emit('connectToRoom', "You are in the gameroom");
+				io.sockets.in('waiting room').emit('connectToRoom', "Please wait till other users are disconnected");
+				io.sockets.in('gameroom').emit('connectToRoom', "Use the buttons to control the object");
 	}
   }
   }
@@ -115,6 +120,8 @@ function leaverooms(){
 			allClients.splice(i, 1);
 		}
    }
+  
+	
   
 	io.sockets.in('waiting room').emit('connectToRoom', "You are in the waitingroom");
 	io.sockets.in('gameroom').emit('connectToRoom', "You are in the gameroom");
