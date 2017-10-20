@@ -9,12 +9,11 @@
   "author": "Anthelme Dumont",
   "license": "ISC",
   "engines": {
-    "socket.io": "^0.9.17",
 	"node": "6.11.3",
 	"npm": "3.10.10"
   }
   "dependencies": {
     "express": "4.13.4",
-    "socket.io": "1.4.6"
+    "socket.io": "^0.9.17"
 	}
 }
