@@ -120,7 +120,7 @@
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="node_modules/socket.io-client/dist/socket.io.js"></script> 
 <script>
-    var socket = io.connect();//.connect('http://remote80.herokuapp.com'); //(http://localhost:3000);
+    var socket = io.connect('http://remote80.herokuapp.com');//.connect('http://remote80.herokuapp.com'); //(http://localhost:3000);
 	
 	var rotation = 10;
 	var timeout = 0, buttonLeft = $('#buttonLeft'), buttonRight = $('#buttonRight');
