@@ -14,16 +14,18 @@
 //server.listen(3000, '0.0.0.0', function() {
  //   console.log('Listening to port:  ' + 3000);
 //});
+
 var app = require('express')();
-var http = require('http').Server(app);
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
-app.get('/', function(req, res) {
-   res.sendfile('index.html');
+server.listen(process.env.PORT);
+
+app.get('/', function (req, res) {
+  res.sendfile(__dirname + '/index.html');
 });
 
-http.listen(process.env.PORT, function() {
-   console.log('listening on *:3000');
-});
+
 var allClients = [];
 var line = 0;
 
