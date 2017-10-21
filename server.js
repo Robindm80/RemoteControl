@@ -40,7 +40,7 @@ io.on('connection', function (socket) {
     countclients();
     
     //io.sockets.in('waiting room').emit('connectToRoom', "You are in the waitingroom");
-    io.sockets.in('gameroom').emit('connectToRoom', "Use the buttons to control the object");
+    socket.to('gameroom').emit('connectToRoom', "Use the buttons to control the object");
     
     socket.on('disconnect', function() {
         console.log('disconnect');
