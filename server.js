@@ -41,7 +41,8 @@ io.on('connection', function (socket) {
     
     //io.sockets.in('waiting room').emit('connectToRoom', "You are in the waitingroom");
     socket.to('gameroom').emit('connectToRoom', "Use the buttons to control the object");
-    
+    console.log("gave message to player");
+	
     socket.on('disconnect', function() {
         console.log('disconnect');
         leaverooms();
