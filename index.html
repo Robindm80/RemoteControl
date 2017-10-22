@@ -122,7 +122,9 @@
 <script>
     var socket = io();//.connect('http://remote80.herokuapp.com'); //(http://localhost:3000);
 	
-	
+	socket.on('connectToRoom', function(data) => {
+    	document.getElementById("displayText").innerHTML = data;
+	});
 	
 	var rotation = 10;
 	var timeout = 0, buttonLeft = $('#buttonLeft'), buttonRight = $('#buttonRight');
@@ -239,9 +241,7 @@
 		socket.emit('color', "");
 	}
 	
-	socket.on('connectToRoom', function(data){
-    	document.getElementById("displayText").innerHTML = data;
-	});
+	
 	
 </script>
 </body>
