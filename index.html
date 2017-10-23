@@ -133,7 +133,7 @@
 	var buttonRightDown = 0;
 	var isisolated = 0;
 	var exploded = 0;
-	var leftie = document.getElementById('buttonLeft');
+	
 	
 
     document.getElementById("buttonLeft").onmousedown = function() {mouseLeftDown(1)};
@@ -150,9 +150,7 @@
 	document.getElementById("explode").onclick = function() {willexplode()};
 	document.getElementById("color").onclick = function() {color()};
 
-	leftie.addEventListener('touchstart', function (e) {
-		goLeft();
-	}
+	
 
     function mouseLeftDown(data) {
 	
