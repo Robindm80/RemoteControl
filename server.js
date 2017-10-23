@@ -31,7 +31,8 @@ var line = 0;
 var connectCounter = 0;
 
 io.on('connection', function (socket) {
-	
+	connectCounter++;
+	console.log(connectCounter);
 	console.log("a newcomer in town");
     socket.join('gameroom');
     
@@ -48,7 +49,8 @@ io.on('connection', function (socket) {
 	
     socket.on('disconnect', function() {
         console.log('disconnect');
-		
+		connectCounter--;
+		console.log(connectCounter);
         leaverooms();
     
     });
