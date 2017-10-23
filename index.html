@@ -134,20 +134,10 @@
 	var isisolated = 0;
 	var exploded = 0;
 	
-	
-
- //   document.getElementById("buttonLeft").onmousedown = function() {mouseLeftDown(1)};
-	//document.getElementById("buttonLeft").onmouseup = function() {mouseLeftUp(0)};
-	//document.getElementById("buttonLeft").ontouchstart = function() {mouseLeftDown(1)};
-	//document.getElementById("buttonLeft").ontouchend = function() {mouseLeftUp(0)};
-	
-	//document.getElementById("buttonRight").onmousedown = function() {mouseRightDown(1)};
-	//document.getElementById("buttonRight").onmouseup = function() {mouseRightUp(0)};
-	//document.getElementById("buttonRight").ontouchstart = function() {mouseRightDown(1)};
-	//document.getElementById("buttonRight").ontouchend = function() {mouseRightUp(0)};
-
 	document.getElementById("buttonLeft").addEventListener("touchstart", mouseLeftDown, false);
 	document.getElementById("buttonLeft").addEventListener("touchend", mouseLeftUp, false);
+	document.getElementById("buttonRight").addEventListener("touchstart", mouseRightDown, false);
+	document.getElementById("buttonRight").addEventListener("touchend", mouseRightUp, false);
 
 	document.getElementById("isolate").onclick = function() {isolate()};
 	document.getElementById("explode").onclick = function() {willexplode()};
@@ -168,13 +158,13 @@
 		
 	}
 	
-	function mouseRightDown(data) {
+	function mouseRightDown(event) {
 	
 		buttonRightDown = 1;
 		RightInterval();
 	}
 	
-	function mouseRightUp(data) {
+	function mouseRightUp(event) {
 		buttonRightDown = 0;
 		RightInterval();
 	}
