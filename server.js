@@ -36,6 +36,9 @@ io.on('connection', function (socket) {
     socket.username = 'gameroom';
     
     console.log(socket.username);
+	if (Object.keys(io.sockets.sockets) > 1){
+		socket.to('gameroom').emit('somebody', data);
+	}
     
     countclients();
     
@@ -45,6 +48,9 @@ io.on('connection', function (socket) {
 	
     socket.on('disconnect', function() {
         console.log('disconnect');
+		if (Object.keys(io.sockets.sockets) < 2){
+		socket.to('gameroom').emit('nobody', data);
+	}
         leaverooms();
     
     });
@@ -104,7 +110,8 @@ io.on('connection', function (socket) {
 		socket.to('gameroom').emit('reader', data);
 		console.log('the reader is back');
 	});
-
+	
+	
 
 function leaverooms(){
 	  if (socket.username === "gameroom"){ 
@@ -123,6 +130,7 @@ function leaverooms(){
   function countclients(){
 	  if(io.nsps['/'].adapter.rooms['gameroom'] != undefined){
 			if(io.nsps['/'].adapter.rooms['gameroom'].length > 2){
+				
 				socket.leave('gameroom');
 				socket.join('waiting room');
 				socket.username = 'waitingroom';
