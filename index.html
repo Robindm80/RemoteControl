@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -73,29 +73,29 @@
 		height: 50px;
 	}
 	.button {
-                background-color: #d61d23; /* Red */
+        background-color: #d61d23; /* Red */
 		width: 75%;
 		height: 4.5vw;
-    border: none;
-    color: white;
-    border-radius: 3px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 2vw;
+		border: none;
+		color: white;
+		border-radius: 3px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 2vw;
 		-webkit-appearance: none;
 	}
 	.button2 {
-    background-color: #d61d23; /* Red */
+		background-color: #d61d23; /* Red */
 		width: 75%;
 		height: 16vw;
-    border: none;
-    color: white;
-    border-radius: 5px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 4vw;
+		border: none;
+		color: white;
+		border-radius: 5px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 4vw;
 		-webkit-appearance: none;
 	}
 	
@@ -133,6 +133,7 @@
 	var buttonRightDown = 0;
 	var isisolated = 0;
 	var exploded = 0;
+	var leftie = document.getElementById('buttonLeft');
 	
 
     document.getElementById("buttonLeft").onmousedown = function() {mouseLeftDown(1)};
@@ -148,6 +149,10 @@
 	document.getElementById("isolate").onclick = function() {isolate()};
 	document.getElementById("explode").onclick = function() {willexplode()};
 	document.getElementById("color").onclick = function() {color()};
+
+	leftie.addEventListener('touchstart', function (e) {
+		goLeft();
+	}
 
     function mouseLeftDown(data) {
 	
@@ -204,23 +209,23 @@
 	}
 	
 	function willexplode(){
-		    var elem = document.getElementById("explode");
-    if (elem.value=="Explode") {
-	    elem.value = "Implode";
-	    explode();
-    }else {
-	    elem.value = "Explode";
-	    explode();
-    }
+		var elem = document.getElementById("explode");
+		if (elem.value=="Explode") {
+			elem.value = "Implode";
+			explode();
+		}else {
+			elem.value = "Explode";
+			explode();
+		}
 	}
 	
-    function goLeft(data) {
-		socket.emit('left', data);
+    function goLeft() {
+		socket.emit('left', "");
 	   
 	}
 	
-	function goRight(data) {
-		socket.emit('right', data);
+	function goRight() {
+		socket.emit('right', "");
 	}
 	
 	function explode() {
