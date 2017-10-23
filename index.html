@@ -136,30 +136,33 @@
 	
 	
 
-    document.getElementById("buttonLeft").onmousedown = function() {mouseLeftDown(1)};
-	document.getElementById("buttonLeft").onmouseup = function() {mouseLeftUp(0)};
-	document.getElementById("buttonLeft").ontouchstart = function() {mouseLeftDown(1)};
-	document.getElementById("buttonLeft").ontouchend = function() {mouseLeftUp(0)};
+ //   document.getElementById("buttonLeft").onmousedown = function() {mouseLeftDown(1)};
+	//document.getElementById("buttonLeft").onmouseup = function() {mouseLeftUp(0)};
+	//document.getElementById("buttonLeft").ontouchstart = function() {mouseLeftDown(1)};
+	//document.getElementById("buttonLeft").ontouchend = function() {mouseLeftUp(0)};
 	
-	document.getElementById("buttonRight").onmousedown = function() {mouseRightDown(1)};
-	document.getElementById("buttonRight").onmouseup = function() {mouseRightUp(0)};
-	document.getElementById("buttonRight").ontouchstart = function() {mouseRightDown(1)};
-	document.getElementById("buttonRight").ontouchend = function() {mouseRightUp(0)};
-	
+	//document.getElementById("buttonRight").onmousedown = function() {mouseRightDown(1)};
+	//document.getElementById("buttonRight").onmouseup = function() {mouseRightUp(0)};
+	//document.getElementById("buttonRight").ontouchstart = function() {mouseRightDown(1)};
+	//document.getElementById("buttonRight").ontouchend = function() {mouseRightUp(0)};
+
+	document.getElementById("buttonLeft").addEventListener("touchstart", mouseLeftDown, false);
+	document.getElementById("buttonLeft").addEventListener("touchend", mouseLeftUp, false);
+
 	document.getElementById("isolate").onclick = function() {isolate()};
 	document.getElementById("explode").onclick = function() {willexplode()};
 	document.getElementById("color").onclick = function() {color()};
 
 	
 
-    function mouseLeftDown(data) {
+    function mouseLeftDown(event) {
 	
 		buttonLeftDown = 1;
 		LeftInterval();
 		
 	}
 	
-	function mouseLeftUp(data) {
+	function mouseLeftUp(event) {
 		buttonLeftDown = 0;
 		LeftInterval();
 		
