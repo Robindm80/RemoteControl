@@ -130,8 +130,10 @@ function leaverooms(){
 			console.log(allClients[i].username);
 		
 			allClients.splice(i, 1);
+			io.sockets.in('waiting room').emit('connectToRoom', "You are in the waitingroom");
+			io.sockets.in('gameroom').emit('connectToRoom', "You are in the gameroom");
 		}
-   }
+  		}
 	}
   
 	
