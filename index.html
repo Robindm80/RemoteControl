@@ -129,10 +129,20 @@
 	
 	socket.on('beenisolated', function(data) {
     	document.getElementById("explode").disabled = false;
+		document.getElementById("isolate").value = "Knifeguard";
 	});
 	
 	socket.on('exploded', function(data) {
     	document.getElementById("explode").value = "Implode";
+	});
+	
+	socket.on('imploded', function(data) {
+    	document.getElementById("explode").value = "Explode";
+	});
+	
+	socket.on('reader', function(data) {
+    	document.getElementById("explode").disabled = true;
+		document.getElementById("isolate").value = "Messenblok";
 	});
 	
 	var rotation = 10;

@@ -94,6 +94,16 @@ io.on('connection', function (socket) {
 		socket.to('gameroom').emit('exploded', data);
 		console.log('just exploded');
 	});
+	
+	socket.on('imploded', function (data) {
+		socket.to('gameroom').emit('imploded', data);
+		console.log('just imploded');
+	});
+	
+	socket.on('reader', function (data) {
+		socket.to('gameroom').emit('reader', data);
+		console.log('the reader is back');
+	});
 
 
 function leaverooms(){
