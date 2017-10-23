@@ -37,7 +37,7 @@ io.on('connection', function (socket) {
     
     console.log(socket.username);
 	if (Object.keys(io.sockets.sockets) > 1){
-		socket.to('gameroom').emit('somebody', data);
+		socket.emit('somebody', data);
 	}
     
     countclients();
@@ -48,8 +48,8 @@ io.on('connection', function (socket) {
 	
     socket.on('disconnect', function() {
         console.log('disconnect');
-		if (Object.keys(io.sockets.sockets) < 2){
-		socket.to('gameroom').emit('nobody', data);
+		if (Object.keys(io.sockets.sockets) === 1){
+		socket.emit('nobody', data);
 	}
         leaverooms();
     
