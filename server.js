@@ -33,6 +33,10 @@ var connectCounter = 0;
 io.on('connection', function (socket) {
 	connectCounter++;
 	console.log(connectCounter);
+	if (connectCounter > 1){
+			socket.to('gameroom').emit('somebody', "no controller");
+		}
+	
 	console.log("a newcomer in town");
     socket.join('gameroom');
     
@@ -51,6 +55,9 @@ io.on('connection', function (socket) {
         console.log('disconnect');
 		connectCounter--;
 		console.log(connectCounter);
+		if (connectCounter === 1){
+			socket.to('gameroom').emit('nobody', "no controller");
+		}
         leaverooms();
     
     });
