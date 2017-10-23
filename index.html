@@ -129,21 +129,34 @@
 	
 	socket.on('beenisolated', function(data) {
     	document.getElementById("explode").disabled = false;
+		explodehide = 1;
 		document.getElementById("isolate").value = "Knifeguard";
 	});
 	
 	socket.on('exploded', function(data) {
     	document.getElementById("explode").value = "Implode";
+		explodetext = "Implode";
 	});
 	
 	socket.on('imploded', function(data) {
     	document.getElementById("explode").value = "Explode";
+		explodetext = "Explode";
 	});
 	
 	socket.on('reader', function(data) {
     	document.getElementById("explode").disabled = true;
+		explodehide = 0;
 		document.getElementById("isolate").value = "Messenblok";
 	});
+	
+	window.onload = function (){
+		document.getElementById("explode").value = explodetext;
+		if (explodehide === 0){
+			document.getElementById("explode").disabled = true;
+		}else{
+			document.getElementById("explode").disabled = false;
+		}
+	}
 	
 	var rotation = 10;
 	var timeout = 0;
@@ -151,6 +164,8 @@
 	var buttonRightDown = 0;
 	var isisolated = 0;
 	var exploded = 0;
+	var explodetext = "Explode";
+	var explodehide = 0;
 	
 	document.getElementById("buttonLeft").addEventListener("touchstart", mouseLeftDown, false);
 	document.getElementById("buttonLeft").addEventListener("touchend", mouseLeftUp, false);
