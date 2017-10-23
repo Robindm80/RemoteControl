@@ -51,12 +51,12 @@ io.on('connection', function (socket) {
     
         
     socket.on('right', function (data) {
-		socket.to('gameroom').emit('right', data);
+		socket.to(socket.username).emit('right', data);
 		console.log('right is being broadcasted');
 	});
 	
 	socket.on('left', function (data) {
-		socket.to('gameroom').emit('left', data);
+		socket.to(socket.username).emit('left', data);
 		console.log('left is being broadcasted');
 	});
 	
