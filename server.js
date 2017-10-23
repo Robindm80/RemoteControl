@@ -31,16 +31,14 @@ var line = 0;
 var connectCounter = 0;
 
 io.on('connection', function (socket) {
-	connectCounter++;
+	
 	console.log("a newcomer in town");
     socket.join('gameroom');
     
     socket.username = 'gameroom';
     
     console.log(socket.username);
-	if (connectCounter > 1){
-		socket.emit('somebody', data);
-	}
+	
     
     countclients();
     
@@ -50,10 +48,7 @@ io.on('connection', function (socket) {
 	
     socket.on('disconnect', function() {
         console.log('disconnect');
-		connectCounter--;
-		if (connectCounter < 2){
-		socket.emit('nobody', data);
-	}
+		
         leaverooms();
     
     });
