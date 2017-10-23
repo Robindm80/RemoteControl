@@ -157,8 +157,8 @@ function leaverooms(){
   
 	
   
-	io.sockets.in('waiting room').emit('connectToRoom', "You are in the waitingroom");
-	io.sockets.in('gameroom').emit('connectToRoom', "You are in the gameroom");
+	io.sockets.in('waiting room').emit('connectToRoom', "Please wait until other users are disconnected");
+	io.sockets.in('gameroom').emit('connectToRoom', "Use the buttons to control the object");
   
 	for(var i = 0; i < allClients.length; i++){
 		console.log(allClients[i].id)
