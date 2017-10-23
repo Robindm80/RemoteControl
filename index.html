@@ -127,6 +127,14 @@
     	document.getElementById("displayText").innerHTML = data;
 	});
 	
+	socket.on('beenisolated', function(data) {
+    	document.getElementById("explode").disabled = false;
+	});
+	
+	socket.on('exploded', function(data) {
+    	document.getElementById("explode").value = "Implode";
+	});
+	
 	var rotation = 10;
 	var timeout = 0;
 	var buttonLeftDown = 0;
@@ -138,12 +146,14 @@
 	document.getElementById("buttonLeft").addEventListener("touchend", mouseLeftUp, false);
 	document.getElementById("buttonRight").addEventListener("touchstart", mouseRightDown, false);
 	document.getElementById("buttonRight").addEventListener("touchend", mouseRightUp, false);
-
-	document.getElementById("isolate").onclick = function() {isolate()};
-	document.getElementById("explode").onclick = function() {willexplode()};
-	document.getElementById("color").onclick = function() {color()};
-
 	
+	document.getElementById("isolate").addEventListener("touchend", isolate, false);
+	document.getElementById("isolate").addEventListener("mouseup", isolate, false);
+	document.getElementById("explode").addEventListener("touchend", willexplode, false);
+	document.getElementById("explode").addEventListener("mouseup", willexplode, false);
+	document.getElementById("color").addEventListener("touchend", color, false);
+	document.getElementById("color").addEventListener("mouseup", color, false);
+		
 
     function mouseLeftDown(event) {
 	
@@ -186,28 +196,17 @@
 	}
 
 	function isolate(){
-		var elem = document.getElementById("isolate");
-		if(elem.value == "Messenblok"){
-			blok();
-			elem.value = "Reader";
-			document.getElementById("explode").disabled = false;
-		}else{
-			blok();
-			elem.value = "Messenblok";
-			if(document.getElementById("explode").value == "Implode"){ document.getElementById("explode").value = "Explode"}
-			document.getElementById("explode").disabled = true;
-		}
+		blok();
+		
+		event.preventDefault();
+		return false;
 	}
 	
 	function willexplode(){
-		var elem = document.getElementById("explode");
-		if (elem.value=="Explode") {
-			elem.value = "Implode";
-			explode();
-		}else {
-			elem.value = "Explode";
-			explode();
-		}
+		explode();
+		
+		event.preventDefault();
+		return false;
 	}
 	
     function goLeft() {

@@ -85,7 +85,15 @@ io.on('connection', function (socket) {
 		console.log('color is being broadcasted');
 	});
 
-    
+    socket.on('beenisolated', function (data) {
+		socket.to('gameroom').emit('beenisolated', data);
+		console.log('been isolated');
+	});
+	
+	socket.on('exploded', function (data) {
+		socket.to('gameroom').emit('exploded', data);
+		console.log('just exploded');
+	});
 
 
 function leaverooms(){
@@ -101,6 +109,7 @@ function leaverooms(){
 			
 		}
 	}
+	
   function countclients(){
 	  if(io.nsps['/'].adapter.rooms['gameroom'] != undefined){
 			if(io.nsps['/'].adapter.rooms['gameroom'].length > 2){
