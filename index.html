@@ -98,7 +98,19 @@
 		font-size: 4vw;
 		-webkit-appearance: none;
 	}
-	
+	#overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+}
 </style>
 </head>
 
@@ -118,6 +130,7 @@
     	<div class="kol2"><input type="button" class="button" id="color" value="Color"></div>
     </div>
 </div>
+	<div id="overlay"></div>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="/socket.io/socket.io.js"></script> 
 <script>
@@ -147,6 +160,14 @@
     	document.getElementById("explode").disabled = true;
 		explodehide = 0;
 		document.getElementById("isolate").value = "Messenblok";
+	});
+	
+	socket.on('overlayon', function() {
+		on();
+	});
+	
+	socket.on('overlayoff', function() {
+		off();
 	});
 	
 	window.onload = function (){
@@ -265,6 +286,14 @@
 		event.preventDefault();
 		return false;
 	}
+	
+	function on() {
+    document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+    document.getElementById("overlay").style.display = "none";
+}
 	
 	
 	
