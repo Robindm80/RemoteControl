@@ -175,7 +175,7 @@ function leaverooms(){
 	
   
 	io.sockets.in('waiting room').emit('overlayon', "");
-	io.sockets.in('gameroom').emit('overlayoff, "");
+	io.sockets.in('gameroom').emit('overlayoff', "");
 	io.sockets.in('gameroom').emit('connectToRoom', "Use the buttons to control the object");
   
 	for(var i = 0; i < allClients.length; i++){
