@@ -166,7 +166,7 @@ function leaverooms(){
 		
 			allClients.splice(i, 1);
 			io.sockets.in('waiting room').emit('overlayon', "");
-			io.sockets.in('gameroom').emit('connectToRoom', "You are in the gameroom");
+			io.sockets.in('gameroom').emit('connectToRoom', "Use the buttons to control the object");
 			io.sockets.in('gameroom').emit('overlayoff', "");
 		}
   		}
