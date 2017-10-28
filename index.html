@@ -111,7 +111,15 @@
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
 }
-	
+	#text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+}
 </style>
 </head>
 
@@ -131,7 +139,7 @@
     	<div class="kol2"><input type="button" class="button" id="color" value="Color"></div>
     </div>
 </div>
-	<div id="overlay"></div>
+	<div id="overlay">  <div id="text">Please wait until other users close their connection</div></div>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="/socket.io/socket.io.js"></script> 
 <script>
