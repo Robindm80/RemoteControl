@@ -33,10 +33,7 @@ var connectCounter = 0;
 io.on('connection', function (socket) {
 	connectCounter++;
 	console.log(connectCounter);
-	if (connectCounter > 1){
-			socket.to('gameroom').emit('somebody', "no controller");
-		}
-	
+		
 	console.log("a newcomer in town");
     socket.join('gameroom');
     
@@ -55,9 +52,7 @@ io.on('connection', function (socket) {
         console.log('disconnect');
 		connectCounter--;
 		console.log(connectCounter);
-		if (connectCounter === 1){
-			socket.to('gameroom').emit('nobody', "no controller");
-		}
+		
         leaverooms();
     
     });
@@ -130,7 +125,7 @@ function leaverooms(){
 			var i = allClients.indexOf(socket);
 			allClients[i].leave('waiting room');
 			allClients.splice(i, 1);
-			
+			waitmessage();
 		}
 	}
 	
@@ -148,6 +143,7 @@ function leaverooms(){
 				//io.sockets.in('waiting room').emit('connectToRoom', "Please wait till other users are disconnected");
 				io.sockets.in('waiting room').emit('overlayon', "");
 				io.sockets.in('gameroom').emit('connectToRoom', "Use the buttons to control the object");
+				waitmessage();
 	}
   }
   }
@@ -168,11 +164,17 @@ function leaverooms(){
 			io.sockets.in('waiting room').emit('overlayon', "");
 			io.sockets.in('gameroom').emit('connectToRoom', "Use the buttons to control the object");
 			io.sockets.in('gameroom').emit('overlayoff', "");
+			waitmessage();
 		}
   		}
 	}
   
-	
+	function waitmessage(){
+		for (var i = 0; i < allClients.length; i++){
+			io.to(allClients[i].id).emit('queumessage', "There are " + i + " users in front of you");
+
+		}
+	}
   
 	io.sockets.in('waiting room').emit('overlayon', "");
 	io.sockets.in('gameroom').emit('overlayoff', "");
