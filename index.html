@@ -149,6 +149,10 @@
     	document.getElementById("displayText").innerHTML = data;
 	});
 	
+	socket.on('queumessage', function(data) {
+		document.getElementById("text").innerHTML = data;
+	});
+	
 	socket.on('beenisolated', function(data) {
     	document.getElementById("explode").disabled = false;
 		explodehide = 1;
