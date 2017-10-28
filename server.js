@@ -145,7 +145,7 @@ function leaverooms(){
 		
 				console.log(socket.username);
 				
-				io.sockets.in('waiting room').emit('connectToRoom', "Please wait till other users are disconnected");
+				//io.sockets.in('waiting room').emit('connectToRoom', "Please wait till other users are disconnected");
 				io.sockets.in('waiting room').emit('overlayon', "");
 				io.sockets.in('gameroom').emit('connectToRoom', "Use the buttons to control the object");
 	}
@@ -165,7 +165,7 @@ function leaverooms(){
 			console.log(allClients[i].username);
 		
 			allClients.splice(i, 1);
-			io.sockets.in('waiting room').emit('connectToRoom', "You are in the waitingroom");
+			io.sockets.in('waiting room').emit('overlayon', "");
 			io.sockets.in('gameroom').emit('connectToRoom', "You are in the gameroom");
 			io.sockets.in('gameroom').emit('overlayoff', "");
 		}
@@ -174,7 +174,8 @@ function leaverooms(){
   
 	
   
-	io.sockets.in('waiting room').emit('connectToRoom', "Please wait until other users are disconnected");
+	io.sockets.in('waiting room').emit('overlayon', "");
+	io.sockets.in('gameroom').emit('overlayoff, "");
 	io.sockets.in('gameroom').emit('connectToRoom', "Use the buttons to control the object");
   
 	for(var i = 0; i < allClients.length; i++){
