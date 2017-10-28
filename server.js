@@ -171,7 +171,15 @@ function leaverooms(){
   
 	function waitmessage(){
 		for (var i = 0; i < allClients.length; i++){
-			io.to(allClients[i].id).emit('queumessage', "There are " + i + " users in front of you");
+			if ( i === 0){
+			io.to(allClients[i].id).emit('queumessage', "You are first in line");
+			}else if ( i === 1){
+			io.to(allClients[i].id).emit('queumessage', "You are second in line");
+			}else if ( i === 2){
+			io.to(allClients[i].id).emit('queumessage', "You are third in line");
+			}else {
+			io.to(allClients[i].id).emit('queumessage', "You are " + i + "th in line");
+			}
 
 		}
 	}
