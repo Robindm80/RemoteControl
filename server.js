@@ -188,7 +188,7 @@ function leaverooms(){
 	}
 	
 	function clearroom(){
-		if(io.sockets.adapter.sids[socket.id][gameroom]){
+		if(io.sockets.adapter.sids[socket.id]["gameroom"]){
 			console.log("Unity is in the correct room");
 		} else {
 			console.log("oh oh Unity is left out to dry");
