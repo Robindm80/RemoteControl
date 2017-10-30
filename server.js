@@ -192,15 +192,17 @@ function leaverooms(){
 			console.log("Unity is in the correct room");
 		} else {
 			console.log("oh oh Unity is left out to dry");
-		}
-		
-		io.of('/').in('gameroom').clients((error, socketIds) => {
+			
+			io.of('/').in('gameroom').clients((error, socketIds) => {
 			if (error) throw error;
 
 			console.log(clients);
 		//	socketIds.forEach(socketId => io.of('/').adapter.remoteLeave(socketId, 'gameroom'));
 
 		});
+		}
+		
+		
 	}
   
 	io.sockets.in('waiting room').emit('overlayon', "");
