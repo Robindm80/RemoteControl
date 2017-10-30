@@ -188,7 +188,7 @@ function leaverooms(){
 	}
 	
 	function clearroom(){
-		if(io.sockets.adapter.sids[socket.id]['gameroom']){
+		if(io.sockets.adapter.sids[socket.id]["gameroom"]){
 			console.log("Unity is in the correct room");
 		} else {
 			console.log("oh oh Unity is left out to dry");
@@ -200,7 +200,7 @@ function leaverooms(){
 			console.log(clients);
 		//	socketIds.forEach(socketId => io.of('/').adapter.remoteLeave(socketId, 'gameroom'));
 
-		//});
+		});
 	}
   
 	io.sockets.in('waiting room').emit('overlayon', "");
