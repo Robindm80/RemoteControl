@@ -195,6 +195,7 @@ function leaverooms(){
 			console.log("Unity is in the correct room");
 		} else {
 			console.log("oh oh Unity is left out to dry");
+			socket.leave('waiting room');
 			socket.join('gameroom');
 			io.in('gameroom').clients((err, clients) => {
 				console.log(clients); // an array containing socket ids in 'gameroom'
