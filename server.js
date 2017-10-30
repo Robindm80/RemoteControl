@@ -193,13 +193,9 @@ function leaverooms(){
 		} else {
 			console.log("oh oh Unity is left out to dry");
 			
-			io.of('/').in('gameroom').clients((error, socketIds) => {
-			if (error) throw error;
-
-			console.log(clients);
-		//	socketIds.forEach(socketId => io.of('/').adapter.remoteLeave(socketId, 'gameroom'));
-
-		});
+			io.in('gameroom').clients((err, clients) => {
+				console.log(clients); // an array containing socket ids in 'gameroom'
+			});
 		}
 		
 		
