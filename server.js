@@ -113,7 +113,9 @@ io.on('connection', function (socket) {
 		console.log('the reader is back');
 	});
 	
-	
+	socket.on('letmein', function () {
+		clearroom();
+	});
 
 function leaverooms(){
 	  if (socket.username === "gameroom"){ 
@@ -183,6 +185,21 @@ function leaverooms(){
 			}
 
 		}
+	}
+	
+	function clearroom(){
+		if(io.sockets.adapter.sids[socket.id][gameroom]){
+			console.log("Unity is in the correct room");
+		} else {
+			console.log("oh oh Unity is left out to dry");
+		}
+		
+		//io.of('/').in('gameroom').clients((error, socketIds) => {
+		//	if (error) throw error;
+
+		//	socketIds.forEach(socketId => io.of('/').adapter.remoteLeave(socketId, 'gameroom'));
+
+		//});
 	}
   
 	io.sockets.in('waiting room').emit('overlayon', "");
