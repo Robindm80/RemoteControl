@@ -195,7 +195,10 @@ function leaverooms(){
 			
 			io.in('gameroom').clients((err, clients) => {
 				console.log(clients); // an array containing socket ids in 'gameroom'
-				console.log(clients[1]);
+				clients[1].leave('gameroom');
+				clients[1].join('waiting room');
+				allClients.push(clients[1]);
+				socket.join('gameroom');
 			});
 		}
 		
