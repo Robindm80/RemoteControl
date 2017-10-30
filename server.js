@@ -166,6 +166,7 @@ function leaverooms(){
 			io.sockets.in('waiting room').emit('overlayon', "");
 			io.sockets.in('gameroom').emit('connectToRoom', "Use the buttons to control the object");
 			io.sockets.in('gameroom').emit('overlayoff', "");
+			console.log("socket paased through here");
 			waitmessage();
 		}
   		} else {
