@@ -168,7 +168,9 @@ function leaverooms(){
 			io.sockets.in('gameroom').emit('overlayoff', "");
 			waitmessage();
 		}
-  		}
+  		} else {
+			console.log("you made a wrong turn");
+		}
 	}
   
 	function waitmessage(){
