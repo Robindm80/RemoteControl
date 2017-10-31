@@ -197,11 +197,13 @@ function leaverooms(){
 			console.log("oh oh Unity is left out to dry");
 			socket.leave('waiting room');
 			socket.join('gameroom');
+			allClients.splice(-1, 1);
 			io.in('gameroom').clients((err, clients) => {
 				console.log(clients); // an array containing socket ids in 'gameroom'
 				let socket1 = io.sockets.connected[clients[1]];
 				socket1.leave('gameroom');
 				socket1.join('waiting room');
+				clients.splice(1, 1);
 				allClients.push(socket1);
 				moveplayers();
 			});
