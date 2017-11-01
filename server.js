@@ -113,9 +113,9 @@ io.on('connection', function (socket) {
 		console.log('the reader is back');
 	});
 	
-	socket.on('letmein', function () {
-		clearroom();
-	});
+	//socket.on('letmein', function () {
+		//clearroom();
+	//});
 
 function leaverooms(){
 	  if (socket.username === "gameroom"){ 
