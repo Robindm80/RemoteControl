@@ -43,6 +43,7 @@ io.on('connection', function (socket) {
 	
     
     countclients();
+	screensaver();
     
     //io.sockets.in('waiting room').emit('connectToRoom', "You are in the waitingroom");
     socket.to('gameroom').emit('connectToRoom', "Use the buttons to control the object");
@@ -54,6 +55,7 @@ io.on('connection', function (socket) {
 		console.log(connectCounter);
 		
         leaverooms();
+	    screensaver();
     
     });
     
@@ -221,5 +223,12 @@ function leaverooms(){
 		console.log("the id of client 0: "+ allClients[0].id);
 	}
     
+	function screensaver(){
+		if(connectCounter > 1){
+			io.sockets.in('gameroom').emit('somebody', "");	
+		}else {
+			io.sockets.in('gameroom').emit('nobody', "");	
+		}
+	}
 
 });
