@@ -243,6 +243,7 @@
 			left1 = setInterval(function () { goLeft(1) }, 1000 / 25);
 		} else {
 			clearInterval(left1);
+			stopLeft();
 		}
 	}
 	
@@ -251,6 +252,7 @@
 			right1 = setInterval(function () { goRight(1) }, 1000 / 25);
 		} else {
 			clearInterval(right1);
+			stopRight();
 		}
 	}
 
@@ -268,13 +270,21 @@
 		return false;
 	}
 	
-    function goLeft() {
+    	function goLeft() {
 		socket.emit('left', "");
 	   
 	}
 	
+	function stopLeft() {
+		socket.emit('stopleft', "");
+	}
+	
 	function goRight() {
 		socket.emit('right', "");
+	}
+	
+	function stopRight() {
+		socket.emit('stopright', "");
 	}
 	
 	function explode() {
