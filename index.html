@@ -14,6 +14,7 @@
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
+	user-scalable=no
 	
 	.contianer {
 		width: 100%;
@@ -320,7 +321,18 @@ function off() {
     document.getElementById("overlay").style.display = "none";
 }
 	
+document.addEventListener('touchmove', function (event) {
+  if (event.scale !== 1) { event.preventDefault(); }
+}, false);
 	
+var lastTouchEnd = 0;
+document.addEventListener('touchend', function (event) {
+  var now = (new Date()).getTime();
+  if (now - lastTouchEnd <= 300) {
+    event.preventDefault();
+  }
+  lastTouchEnd = now;
+}, false);
 	
 </script>
 </body>
